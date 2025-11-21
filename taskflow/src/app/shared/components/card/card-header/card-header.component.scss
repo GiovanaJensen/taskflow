@@ -1,0 +1,13 @@
+@use '../../../styles/variables' as *;
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: $card-padding;
+    border-bottom: 1px solid $color-card-border;
+
+    &.dark {
+        border-color: $color-card-border-dark;
+    }
+}

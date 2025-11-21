@@ -1,0 +1,11 @@
+@use '../../../styles/variables' as *;
+
+.card-description {
+    font-size: 0.875rem;
+    color: $color-card-muted;
+    margin: 0;
+
+    &.dark {
+        color: $color-card-muted-dark;
+    }
+}

@@ -1,0 +1,47 @@
+<app-card>
+  <app-card-header>
+    <app-card-title>Acesse sua conta</app-card-title>
+    <app-card-description>Entre com sua conta ou crie uma nova</app-card-description>
+  </app-card-header>
+
+  <app-card-content>
+    <app-tabs defaultValue="login">
+
+      <app-tabs-list>
+        <app-tabs-trigger value="login">Login</app-tabs-trigger>
+        <app-tabs-trigger value="signup">Cadastro</app-tabs-trigger>
+      </app-tabs-list>
+
+      <app-tabs-content value="login">
+        <div class="form-field">
+            <app-label for="email">E-mail</app-label>
+            <app-input id="email" name="email" placeholder="seu@email.com" type="email"></app-input>
+        </div>
+        <div class="form-field">
+            <app-label for="password">Senha</app-label>
+            <app-input id="password" name="password" placeholder="••••••••" type="password"></app-input>
+        </div>
+      </app-tabs-content>
+
+      <app-tabs-content value="signup">
+        <div class="form-field">
+            <app-label for="name">Nome completo</app-label>
+            <app-input id="name" name="name" placeholder="Seu nome" type="text"></app-input>
+        </div>
+        <div class="form-field">
+            <app-label for="email">E-mail</app-label>
+            <app-input id="email" name="email" placeholder="seu@email.com" type="email"></app-input>
+        </div>
+        <div class="form-field">
+            <app-label for="password">Senha</app-label>
+            <app-input id="password" name="password" placeholder="••••••••" type="password"></app-input>
+        </div>
+      </app-tabs-content>
+
+    </app-tabs>
+  </app-card-content>
+
+  <app-card-footer>
+    <app-button variant="default" size="full">Criar conta</app-button>
+  </app-card-footer>
+</app-card>

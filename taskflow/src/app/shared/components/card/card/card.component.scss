@@ -1,0 +1,16 @@
+@use '../../../styles/variables' as *;
+
+.card {
+    border: 1px solid $color-card-border;
+    border-radius: $card-border-radius;
+    background-color: $color-card-bg;
+    color: $color-card-text;
+    box-shadow: $card-shaddow;
+    transition: background-color 0.3s, color 0.3s;
+
+    &.dark {
+        background-color: $color-card-bg-dark;
+        color: $color-card-text-dark;
+        border-color: $color-card-border-dark;
+    }
+}
