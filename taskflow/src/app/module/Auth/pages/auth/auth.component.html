@@ -1,47 +1,79 @@
-<app-card>
-  <app-card-header>
-    <app-card-title>Acesse sua conta</app-card-title>
-    <app-card-description>Entre com sua conta ou crie uma nova</app-card-description>
-  </app-card-header>
+<div class="auth-container">
+  <div class="auth-grid">
+    <div class="auth-info">
+      <h1 class="title">TaskFlow</h1>
+      <p class="subtitle">Organize suas tarefas de forma simples e eficiente</p>
 
-  <app-card-content>
-    <app-tabs defaultValue="login">
+      <div class="features">
+        <div class="feature">✔ Categorize suas tarefas</div>
+        <div class="feature">✔ Defina prioridades</div>
+        <div class="feature">✔ Acompanhe seu progresso</div>
+        <div class="feature">✔ Receba notificações</div>
+      </div>
+    </div>
+    <app-card class="auth-card">
+      <app-card-header>
+        <app-card-title>Acesse sua conta</app-card-title>
+        <app-card-description>Entre com sua conta ou crie uma nova</app-card-description>
+      </app-card-header>
 
-      <app-tabs-list>
-        <app-tabs-trigger value="login">Login</app-tabs-trigger>
-        <app-tabs-trigger value="signup">Cadastro</app-tabs-trigger>
-      </app-tabs-list>
+      <app-card-content>
+        <app-tabs defaultValue="login">
 
-      <app-tabs-content value="login">
-        <div class="form-field">
-            <app-label for="email">E-mail</app-label>
-            <app-input id="email" name="email" placeholder="seu@email.com" type="email"></app-input>
-        </div>
-        <div class="form-field">
-            <app-label for="password">Senha</app-label>
-            <app-input id="password" name="password" placeholder="••••••••" type="password"></app-input>
-        </div>
-      </app-tabs-content>
+          <app-tabs-list>
+            <app-tabs-trigger value="login">Login</app-tabs-trigger>
+            <app-tabs-trigger value="signup">Cadastro</app-tabs-trigger>
+          </app-tabs-list>
 
-      <app-tabs-content value="signup">
-        <div class="form-field">
-            <app-label for="name">Nome completo</app-label>
-            <app-input id="name" name="name" placeholder="Seu nome" type="text"></app-input>
-        </div>
-        <div class="form-field">
-            <app-label for="email">E-mail</app-label>
-            <app-input id="email" name="email" placeholder="seu@email.com" type="email"></app-input>
-        </div>
-        <div class="form-field">
-            <app-label for="password">Senha</app-label>
-            <app-input id="password" name="password" placeholder="••••••••" type="password"></app-input>
-        </div>
-      </app-tabs-content>
+          <app-tabs-content value="login">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <div class="form-field">
+                  <app-label for="email">E-mail</app-label>
+                  <app-input id="email" name="email" placeholder="seu@email.com" type="email" formControlName="email"></app-input>
+              </div>
+              <div class="form-field">
+                  <app-label for="password">Senha</app-label>
+                  <app-input id="password" name="password" placeholder="••••••••" type="password" formControlName="password"></app-input>
+              </div>
+  
+              <app-button
+                variant="default"
+                size="full"
+                [disabled]="isLoading"
+                type="submit"
+              >
+                {{ isLoading ? 'Entrando...' : 'Entrar' }}
+              </app-button>
+            </form>
+          </app-tabs-content>
 
-    </app-tabs>
-  </app-card-content>
+          <app-tabs-content value="signup">
+            <form [formGroup]="signupForm" (ngSubmit)="signup()">
+              <div class="form-field">
+                  <app-label for="name">Nome completo</app-label>
+                  <app-input id="name" name="name" placeholder="Seu nome" type="text" formControlName="fullName"></app-input>
+              </div>
+              <div class="form-field">
+                  <app-label for="email">E-mail</app-label>
+                  <app-input id="email" name="email" placeholder="seu@email.com" type="email" formControlName="email"></app-input>
+              </div>
+              <div class="form-field">
+                  <app-label for="password">Senha</app-label>
+                  <app-input id="password" name="password" placeholder="••••••••" type="password" formControlName="password"></app-input>
+              </div>
+              <app-button
+                variant="default"
+                size="full"
+                [disabled]="isLoading"
+                type="submit"
+              >
+                {{ isLoading ? 'Criando conta...' : 'Criar conta' }}
+              </app-button>
+            </form>
+          </app-tabs-content>
 
-  <app-card-footer>
-    <app-button variant="default" size="full">Criar conta</app-button>
-  </app-card-footer>
-</app-card>
+        </app-tabs>
+      </app-card-content>
+    </app-card>
+  </div>
+</div>
