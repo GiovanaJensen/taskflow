@@ -1,0 +1,12 @@
+<app-avatar className="avatar-lg">
+  <app-avatar-image
+    [src]="userImage"
+    alt="Foto do usuário"
+    (onError)="showFallback = true"
+    *ngIf="!showFallback"
+  />
+
+  <app-avatar-fallback *ngIf="showFallback">
+    {{ userInitials }}
+  </app-avatar-fallback>
+</app-avatar>
