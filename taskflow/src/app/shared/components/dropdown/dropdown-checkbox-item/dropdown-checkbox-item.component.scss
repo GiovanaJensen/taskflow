@@ -1,0 +1,28 @@
+.dm-checkbox { 
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.375rem .5rem;
+  border-radius:.25rem;
+  cursor:pointer; 
+}
+
+.dm-checkbox-indicator { 
+  width:1rem;
+  height:1rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:.25rem;
+  background:transparent; 
+  opacity:.9; 
+}
+
+.dm-checkbox-indicator.checked { 
+  background: var(--primary, #2463eb); 
+  color: #fff; 
+}
+
+.dm-checkbox:hover { 
+  background: var(--accent-bg,#f3f4f6); 
+}

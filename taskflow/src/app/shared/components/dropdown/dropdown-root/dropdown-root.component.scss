@@ -1,0 +1,13 @@
+:host {
+  display: inline-block;
+}
+
+:host ::ng-deep app-dropdown-content {
+  display: contents !important;
+}
+
+.dropdown-content-wrapper {
+  display: contents;
+}
+
+:host(.open) { }

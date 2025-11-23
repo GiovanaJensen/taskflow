@@ -1,12 +1,51 @@
-<app-avatar className="avatar-lg">
-  <app-avatar-image
-    [src]="userImage"
-    alt="Foto do usuário"
-    (onError)="showFallback = true"
-    *ngIf="!showFallback"
-  />
+<nav class="navbar">
+  <div class="navbar-container">
 
-  <app-avatar-fallback *ngIf="showFallback">
-    {{ userInitials }}
-  </app-avatar-fallback>
-</app-avatar>
+    <div class="navbar-left">
+      <div class="logo-box">
+        <span class="logo-text">TF</span>
+      </div>
+      <h1 class="logo-title">TaskFlow</h1>
+    </div>
+    
+    <app-dropdown>
+
+      <app-dropdown-trigger>
+        <button class="avatar-button">
+          <app-avatar className="avatar-lg">
+            <app-avatar-image
+              [src]="userImage"
+              alt="Foto do usuário"
+              (onError)="showFallback = true"
+              *ngIf="!showFallback"
+            />
+
+            <app-avatar-fallback *ngIf="showFallback">
+              {{ userInitials }}
+            </app-avatar-fallback>
+          </app-avatar>
+        </button>
+      </app-dropdown-trigger>
+
+      <app-dropdown-content class="menu-content" align="end">
+        <app-dropdown-label>
+          <div class="account-info">
+            <p class="name">Minha conta</p>
+            <p class="email">{{ user?.email }}</p>
+          </div>
+        </app-dropdown-label>
+
+        <app-dropdown-separator></app-dropdown-separator>
+
+        <app-dropdown-item class="disabled-item" [value]="'perfil'">
+          <span>Perfil</span>
+        </app-dropdown-item>
+
+        <app-dropdown-item class="logout-item" (select)="handleLogout()">
+          <span>Sair</span>
+        </app-dropdown-item>
+
+      </app-dropdown-content>
+    </app-dropdown>
+  </div>
+</nav>
