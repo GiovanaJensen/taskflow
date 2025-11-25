@@ -74,7 +74,7 @@ export class AuthComponent implements OnInit {
 
         if (email === 'teste@email.com' && password === '123456') {
             alert('Login realizado com sucesso!');
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['']);
         } else {
             alert('Credenciais inválidas');
         }
