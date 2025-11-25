@@ -1,0 +1,55 @@
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      <span>Filtros</span>
+    </div>
+  </div>
+
+  <div class="card-content">
+    
+    <div class="row">
+      <app-checkbox
+        [checked]="showCompleted"
+        (checkedChange)="toggleCompleted($event)"
+      ></app-checkbox>
+
+      <label class="checkbox-label" (click)="toggleCompleted(!showCompleted)">
+        Mostrar concluídas
+      </label>
+    </div>
+
+    <div class="categories">
+      <h4 class="subtitle">Categorias</h4>
+
+      <app-button
+        [variant]="selectedCategory === null ? 'secondary' : 'ghost'"
+        class="full-row"
+        (click)="selectCategory(null)"
+      >
+        <span class="left">
+          Todas
+        </span>
+
+        <app-badge variant="secondary">
+          {{ totalCount() }}
+        </app-badge>
+      </app-button>
+
+      <app-button
+        *ngFor="let category of categories"
+        [variant]="selectedCategory === category.id ? 'secondary' : 'ghost'"
+        class="full-row"
+        (click)="selectCategory(category.id)"
+      >
+        <span class="left">
+          <span class="emoji">{{ category.icon }}</span>
+          <span>{{ category.name }}</span>
+        </span>
+
+        <app-badge variant="secondary" *ngIf="taskCounts[category.id] > 0">
+          {{ taskCounts[category.id] }}
+        </app-badge>
+      </app-button>
+    </div>
+  </div>
+</div>

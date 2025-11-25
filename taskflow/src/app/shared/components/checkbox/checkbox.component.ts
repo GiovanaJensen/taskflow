@@ -1,8 +1,8 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 @Component({
-  selector: 'checkbox',
+  selector: 'app-checkbox',
   standalone: true,
   templateUrl: './checkbox.component.html',
   styleUrls: ['./checkbox.component.scss'],
@@ -15,8 +15,9 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   ]
 })
 export class CheckboxComponent implements ControlValueAccessor {
+  @Input() checked = false;
   @Input() disabled = false;
-  checked = false;
+  @Output() checkedChange = new EventEmitter<boolean>();
 
   private onChange = (value: boolean) => {};
   private onTouched = () => {};
@@ -24,8 +25,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   toggle() {
     if (this.disabled) return;
     this.checked = !this.checked;
-    this.onChange(this.checked);
-    this.onTouched();
+    this.checkedChange.emit(this.checked);
   }
 
   writeValue(value: boolean): void {
