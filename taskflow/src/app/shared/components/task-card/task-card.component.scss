@@ -1,0 +1,112 @@
+/* CARD BASE */
+.task-card {
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  &.task-completed {
+    opacity: 0.6;
+  }
+}
+
+/* CONTENT */
+.task-content {
+  padding: 1rem;
+}
+
+.task-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.task-checkbox {
+  margin-top: 0px;
+}
+
+.task-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-header {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.task-texts {
+  flex: 1;
+}
+
+.task-title {
+  font-weight: 500;
+  margin: 0px;
+
+  &.completed {
+    text-decoration: line-through;
+    color: var(--muted-foreground);
+  }
+}
+
+.task-description {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.task-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* CATEGORY BADGE */
+.badge-category {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* PRIORITY BADGES */
+.badge-priority.low {
+  background: rgba(59, 130, 246, 0.1);
+  color: #1e40af;
+}
+
+.badge-priority.medium {
+  background: rgba(234, 179, 8, 0.1);
+  color: #b45309;
+}
+
+.badge-priority.high {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+/* DATE BADGE */
+.badge-date {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* MENU BUTTON */
+.task-menu-btn {
+  height: 32px;
+  width: 32px;
+}
+
+/* DELETE ITEM */
+.delete-item {
+  color: var(--destructive);
+  cursor: pointer;
+
+  .delete-icon {
+    margin-right: 6px;
+  }
+}

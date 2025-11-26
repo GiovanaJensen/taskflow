@@ -3,6 +3,7 @@ import { Component } from "@angular/core";
 import { NavbarComponent } from "../../shared/components/navbar/navbar.component";
 import { FiltroCategoriaComponent } from "../../shared/components/filtro-categoria/filtro-categoria.component";
 import { Tarefa } from "../../shared/interfaces/Tarefa";
+import { TaskListComponent } from "../../shared/components/task-list/task-list.component";
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,9 @@ import { Tarefa } from "../../shared/interfaces/Tarefa";
   imports: [
     CommonModule,
     NavbarComponent,
-    FiltroCategoriaComponent
-  ]
+    FiltroCategoriaComponent,
+    TaskListComponent
+]
 })
 export class HomeComponent {
 

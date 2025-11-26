@@ -3,7 +3,6 @@
   align-items: center;
   border-radius: 9999px;
   border-width: 1px;
-  padding: 0.125rem 0.625rem;
   font-size: 0.75rem;
   font-weight: 600;  
   transition: background-color 0.2s, color 0.2s;
@@ -27,6 +26,7 @@
 
   &.secondary {
     border-color: transparent;
+    padding: 0.125rem 0.625rem;
     background: var(--secondary);
     color: var(--secondary-foreground);
 

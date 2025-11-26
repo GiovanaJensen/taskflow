@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
@@ -12,7 +13,8 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
       useExisting: forwardRef(() => CheckboxComponent),
       multi: true,
     },
-  ]
+  ],
+  imports: [CommonModule]
 })
 export class CheckboxComponent implements ControlValueAccessor {
   @Input() checked = false;
