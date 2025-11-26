@@ -1,0 +1,12 @@
+.dm-sub-content {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    margin-left: .25rem;
+    min-width: 8rem;
+    background: var(--popover-bg,#fff);
+    border: 1px solid var(--border,#e5e7eb);
+    padding: .25rem;
+    border-radius: .25rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}

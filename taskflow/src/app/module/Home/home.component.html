@@ -1,0 +1,12 @@
+<app-navbar></app-navbar>
+
+<div class="home-container">
+
+  <app-filtro-categoria
+    [selectedCategory]="selectedCategory"
+    [showCompleted]="showCompleted"
+    (selectedCategoryChange)="onCategoryChange($event)"
+    (showCompletedChange)="onShowCompletedChange($event)"
+    ></app-filtro-categoria>
+
+</div>

@@ -8,3 +8,23 @@ body {
   color: #111827;
   margin: 0;
 }
+
+:root {
+  --primary: #6366f1;
+  --primary-rgb: 99,102,241;
+  --primary-foreground: #ffffff;
+
+  --secondary: #e5e7eb;
+  --secondary-rgb: 229,231,235;
+  --secondary-foreground: #111827;
+
+  --destructive: #ef4444;
+  --destructive-rgb: 239,68,68;
+  --destructive-foreground: #ffffff;
+
+  --border: #e5e7eb;
+  --foreground: #111827;
+
+  --ring: rgba(79, 70, 229, 0.5);
+  --background: #ffffff;
+}

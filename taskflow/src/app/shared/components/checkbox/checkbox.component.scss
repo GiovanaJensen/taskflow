@@ -1,0 +1,34 @@
+.checkbox {
+  height: 16px;
+  width: 16px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--ring), 0 0 0 4px var(--background);
+  }
+
+  &.checked {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .icon {
+    height: 16px;
+    width: 16px;
+    stroke: currentColor;
+  }
+}
