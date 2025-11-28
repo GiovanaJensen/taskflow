@@ -1,4 +1,3 @@
-/* CARD BASE */
 .task-card {
   transition: all 0.2s ease;
 
@@ -11,7 +10,6 @@
   }
 }
 
-/* CONTENT */
 .task-content {
   padding: 1rem;
 }
@@ -65,14 +63,12 @@
   margin-top: 12px;
 }
 
-/* CATEGORY BADGE */
 .badge-category {
   display: flex;
   gap: 4px;
   align-items: center;
 }
 
-/* PRIORITY BADGES */
 .badge-priority.low {
   background: rgba(59, 130, 246, 0.1);
   color: #1e40af;
@@ -88,20 +84,17 @@
   color: #dc2626;
 }
 
-/* DATE BADGE */
 .badge-date {
   display: flex;
   gap: 4px;
   align-items: center;
 }
 
-/* MENU BUTTON */
 .task-menu-btn {
   height: 32px;
   width: 32px;
 }
 
-/* DELETE ITEM */
 .delete-item {
   color: var(--destructive);
   cursor: pointer;
