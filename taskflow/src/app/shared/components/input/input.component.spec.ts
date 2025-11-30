@@ -2,25 +2,16 @@ import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { Component } from "@angular/core";
 import { InputComponent } from "./input.component";
 
-// Host Component criado só para o teste do ng-content
-@Component({
-    template: `<app-label>Nome completo:</app-label>`
-})
-class HostComponent {}
-
 describe('InputComponent', () => {
     let component: InputComponent;
     let fixture: ComponentFixture<InputComponent>;
-    let fixtureHostComponent: ComponentFixture<HostComponent>;
 
     beforeEach(async() => {
         await TestBed.configureTestingModule({
             imports: [InputComponent],
-            declarations: [HostComponent]
         }).compileComponents();
 
         fixture = TestBed.createComponent(InputComponent);
-        fixtureHostComponent = TestBed.createComponent(HostComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     })
