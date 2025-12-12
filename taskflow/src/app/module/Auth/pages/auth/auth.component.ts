@@ -15,6 +15,8 @@ import { TabsListComponent } from "../../../../shared/components/tabs/tabs-list/
 import { TabsTriggerComponent } from "../../../../shared/components/tabs/tabs-trigger/tabs-trigger.component";
 import { Router } from "@angular/router";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { AuthService } from "../../../../shared/services/auth.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @Component({
     selector: 'app-auth',
@@ -56,7 +58,8 @@ export class AuthComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private router: Router
+        private router: Router,
+        private authService: AuthService
     ) {}
 
     async ngOnInit() {
@@ -69,17 +72,25 @@ export class AuthComponent implements OnInit {
 
         const { email, password } = this.loginForm.value;
 
-        // SIMULA LOGIN (2 segundos)
-        await new Promise(r => setTimeout(r, 1000));
-
-        if (email === 'teste@email.com' && password === '123456') {
-            alert('Login realizado com sucesso!');
-            this.router.navigate(['']);
-        } else {
-            alert('Credenciais inválidas');
-        }
-
-        this.isLoading = false;
+        this.authService.login({
+            email: email!,
+            password: password!
+          }).subscribe({
+            next: (response: any) => {
+              this.isLoading = false;
+        
+              if (response.token) {
+                localStorage.setItem('token', response.token);
+              }
+        
+              alert('Login realizado com sucesso!');
+              this.router.navigate(['']);
+            },
+            error: (error) => {
+              this.isLoading = false;
+              alert(error.error?.message || 'Credenciais inválidas');
+            }
+          });
     }
 
     async signup() {
@@ -89,11 +100,21 @@ export class AuthComponent implements OnInit {
 
         const { email, password, fullName } = this.signupForm.value;
 
-        await new Promise(r => setTimeout(r, 1000));
-
-        this.isLoading = false;
-
-        alert("Cadastro realizado com sucesso! Você já pode fazer login!");
+        this.authService.register({
+            fullName: fullName!,
+            email: email!,
+            password: password!
+        }).subscribe({
+            next: () => {
+                this.isLoading = false;
+                alert('Cadastro realizado com sucesso! Você já pode fazer login!');
+                this.signupForm.reset();
+            },
+            error: (err) => {
+                this.isLoading = false;
+                alert('Erro ao criar usuário: ' + (err.error?.message || 'Erro desconhecido'));
+            }
+        })
     }
 
 
