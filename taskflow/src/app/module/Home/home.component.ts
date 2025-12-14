@@ -36,10 +36,10 @@ export class HomeComponent {
   openDialog = false;
   selectedPriority = 'medium';
 
-  selectedCategory: string | null = null;
+  selectedCategory: number | null = null;
   showCompleted = false;
 
-  onCategoryChange(category: string | null) {
+  onCategoryChange(category: number | null) {
     this.selectedCategory = category;
     console.log("Categoria selecionada:", category);
   }
