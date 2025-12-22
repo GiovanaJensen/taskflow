@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskCardComponent } from '../task-card/task-card.component';
 import { Tarefa } from '../../interfaces/Tarefa';
@@ -11,15 +11,22 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./task-list.component.scss'],
   imports: [CommonModule, TaskCardComponent]
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnInit, OnChanges {
 
   @Input() selectedCategory: number | null = null;
   @Input() showCompleted: boolean = true;
+  @Input() taskCreated: number = 0;
 
   tasks: Tarefa[] = [];
   isLoading = true;
 
   constructor(private taskService: TaskService) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['taskCreated'] && !changes['taskCreated'].firstChange) {
+      this.loadTasks();
+    }
+  }
 
   ngOnInit() {
     this.loadTasks();
@@ -52,7 +59,14 @@ export class TaskListComponent implements OnInit {
   }
 
   deleteTask(id: string) {
-    this.tasks = this.tasks.filter(t => t.id !== id);
+    this.taskService.deleteTask(Number(id)).subscribe({
+      next: () => {
+        this.tasks = this.tasks.filter(t => t.id !== id);
+      },
+      error: (error) => {
+        alert('Erro ao deletar tarefa');
+      }
+    });
   }
 
   get pendingTasks() {

@@ -27,6 +27,23 @@ export class TaskService {
         );
     }
 
+    deleteTask(id: number): Observable<string> {
+        return this.http.delete(
+            `${this.API_URL}/delete`,
+            {
+            params: { id },
+            observe: 'response',
+            responseType: 'text'
+            }
+        ).pipe(
+            map(res => res.body as string)
+        );
+    }
+
+    createTask(task: any): Observable<Tarefa> {
+        return this.http.post<Tarefa>(`${this.API_URL}/create`, task);
+    }
+
     private mapToTarefa(task: any): Tarefa {
         return {
           id: String(task.id),

@@ -1,0 +1,102 @@
+<app-dialog [(open)]="open" (openChange)="openChange.emit($event)">
+
+  <app-dialog-title>
+    Nova tarefa
+  </app-dialog-title>
+
+  <app-dialog-description>
+    Adicione uma nova tarefa à sua lista
+  </app-dialog-description>
+
+  <form class="form" (ngSubmit)="submit()">
+
+    <div class="field">
+      <label>Título *</label>
+      <app-input
+        [(ngModel)]="title"
+        name="title"
+        placeholder="Ex: Finalizar relatório"
+        required
+      />
+    </div>
+
+    <div class="field">
+      <label>Descrição</label>
+      <app-input
+        [(ngModel)]="description"
+        name="description"
+        placeholder="Adicione detalhes sobre a tarefa..."
+      />
+    </div>
+
+    <div class="grid">
+      <div class="field">
+        <label>Categoria</label>
+
+        <app-select [(value)]="categoryId">
+          <app-select-trigger>
+            {{ categoryId ? 'Selecionada' : 'Selecione...' }}
+          </app-select-trigger>
+
+          <app-select-content>
+            <app-select-item
+              *ngFor="let c of categories"
+              [value]="c.name.toString()"
+            >
+              {{ c.icon }} {{ c.name }}
+            </app-select-item>
+          </app-select-content>
+        </app-select>
+      </div>
+
+      <div class="field">
+        <label>Prioridade</label>
+
+        <app-select [(value)]="priority">
+          <app-select-trigger>
+            {{ priority === 'low' ? 'Baixa' :
+               priority === 'medium' ? 'Média' : 'Alta' }}
+          </app-select-trigger>
+
+          <app-select-content>
+            <app-select-item value="baixa">Baixa</app-select-item>
+            <app-select-item value="média">Média</app-select-item>
+            <app-select-item value="alta">Alta</app-select-item>
+          </app-select-content>
+        </app-select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Data de vencimento</label>
+      <input
+        type="date"
+        [(ngModel)]="dueDate"
+        name="dueDate"
+        class="date-input"
+        required
+      />
+    </div>
+
+    <app-dialog-footer>
+      <div class="actions">
+        <app-button
+          variant="outline"
+          type="button"
+          (click)="close()"
+        >
+          Cancelar
+        </app-button>
+
+        <app-button
+          type="submit"
+          [disabled]="isSubmitting"
+        >
+          {{ isSubmitting ? 'Criando...' : 'Criar tarefa' }}
+        </app-button>
+      </div>
+    </app-dialog-footer>
+
+  </form>
+
+</app-dialog>

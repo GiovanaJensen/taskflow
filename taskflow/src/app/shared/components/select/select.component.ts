@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class SelectComponent {
-  @Input() value: string | null = null;
+  @Input() value: string | number | null = null;
   @Output() valueChange = new EventEmitter<string>();
 
   open = false;

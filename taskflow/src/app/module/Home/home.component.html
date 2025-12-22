@@ -5,13 +5,32 @@
   <app-filtro-categoria
     [selectedCategory]="selectedCategory"
     [showCompleted]="showCompleted"
+    [categoryCreated]="categoryCreatedVersion"
     (selectedCategoryChange)="onCategoryChange($event)"
     (showCompletedChange)="onShowCompletedChange($event)"
     ></app-filtro-categoria>
 
+  <app-button (click)="openNewTask = true">
+    + Nova tarefa
+  </app-button>
+  <app-button (click)="openNewCategory = true">
+    + Nova category
+  </app-button>
+
+  <app-new-task-dialog
+    [(open)]="openNewTask"
+    (submitTask)="createTask($event)"
+  ></app-new-task-dialog>
+
+  <app-new-category-dialog
+    [(open)]="openNewCategory"
+    (submitCategory)="createCategory($event)"
+  ></app-new-category-dialog>
+
   <app-task-list
     [selectedCategory]="selectedCategory"
     [showCompleted]="showCompleted"
+    [taskCreated]="taskCreatedVersion"
   ></app-task-list>
 
 </div>

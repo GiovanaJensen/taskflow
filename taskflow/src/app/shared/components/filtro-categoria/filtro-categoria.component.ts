@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { CheckboxComponent } from "../checkbox/checkbox.component";
 import { ButtonComponent } from "../button/button.component";
 import { BadgeComponent } from "../badge/badget.component";
@@ -18,10 +18,11 @@ import { CategoryService } from "../../services/category.service";
   templateUrl: './filtro-categoria.component.html',
   styleUrls: ['./filtro-categoria.component.scss']
 })
-export class FiltroCategoriaComponent implements OnInit {
+export class FiltroCategoriaComponent implements OnInit, OnChanges {
 
   @Input() selectedCategory: number | null = null;
   @Input() showCompleted = false;
+  @Input() categoryCreated = 0;
 
   @Output() selectedCategoryChange = new EventEmitter<number | null>();
   @Output() showCompletedChange = new EventEmitter<boolean>();
@@ -32,6 +33,12 @@ export class FiltroCategoriaComponent implements OnInit {
 
   ngOnInit() {
     this.loadCategories();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['categoryCreated'] && !changes['categoryCreated'].firstChange) {
+      this.loadCategories();
+    }
   }
 
   loadCategories() {
