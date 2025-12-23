@@ -26,6 +26,9 @@ export class TaskListComponent implements OnInit, OnChanges {
     if (changes['taskCreated'] && !changes['taskCreated'].firstChange) {
       this.loadTasks();
     }
+    if (changes['showCompleted'] && !changes['showCompleted'].firstChange) {
+      this.loadTasks();
+    }
   }
 
   ngOnInit() {
@@ -36,8 +39,8 @@ export class TaskListComponent implements OnInit, OnChanges {
     this.isLoading = true;
 
     const request$ = this.selectedCategory
-      ? this.taskService.getByCategory(this.selectedCategory)
-      : this.taskService.getAll();
+      ? this.taskService.getByCategory(this.selectedCategory, this.showCompleted)
+      : this.taskService.getAll(this.showCompleted);
 
     request$.subscribe({
       next: (tasks) => {
@@ -55,7 +58,19 @@ export class TaskListComponent implements OnInit, OnChanges {
   }
 
   toggleComplete(task: Tarefa) {
-    task.completed = !task.completed;
+    const payload = {
+      id: Number(task.id),
+      isCompleted: !task.completed
+    }
+    console.log('task: ', task)
+    this.taskService.finishTask(payload).subscribe({
+      next: () => {
+        task.completed = !task.completed;
+      },
+      error: () => {
+        alert('Erro ao concluir tarefa');
+      }
+    })
   }
 
   deleteTask(id: string) {

@@ -15,14 +15,14 @@ export class TaskService {
 
     constructor(private http: HttpClient) {}
     
-    getAll(): Observable<Tarefa[]> {
-        return this.http.get<any[]>(this.API_URL).pipe(
+    getAll(isCompleted: boolean): Observable<Tarefa[]> {
+        return this.http.get<any[]>(`${this.API_URL}?isCompleted=${isCompleted}`).pipe(
             map(tasks => tasks.map(task => this.mapToTarefa(task)))
         );
     }
 
-    getByCategory(categoryId: number): Observable<Tarefa[]> {
-        return this.http.get<any[]>(`${this.API_URL}/Category/${categoryId}`).pipe(
+    getByCategory(categoryId: number, isCompleted: boolean): Observable<Tarefa[]> {
+        return this.http.get<any[]>(`${this.API_URL}/Category/${categoryId}?isCompleted=${isCompleted}`).pipe(
             map(tasks => tasks.map(task => this.mapToTarefa(task)))
         );
     }
@@ -42,6 +42,10 @@ export class TaskService {
 
     createTask(task: any): Observable<Tarefa> {
         return this.http.post<Tarefa>(`${this.API_URL}/create`, task);
+    }
+
+    finishTask(task: any): Observable<Tarefa> {
+        return this.http.put<Tarefa>(`${this.API_URL}/complete`, task);
     }
 
     private mapToTarefa(task: any): Tarefa {
