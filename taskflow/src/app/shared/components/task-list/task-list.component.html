@@ -1,0 +1,43 @@
+<div class="task-list">
+
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <div *ngIf="!isLoading && tasks.length === 0" class="empty">
+    Nenhuma tarefa encontrada.
+  </div>
+
+  <div *ngIf="pendingTasks.length > 0">
+    <h2 class="section-title">Pendentes ({{ pendingTasks.length }})</h2>
+
+    <div class="task-group">
+      <app-task-card
+        *ngFor="let t of pendingTasks"
+        [task]="t"
+        (toggleComplete)="toggleComplete(t)"
+        (delete)="deleteTask(t.id)"
+      ></app-task-card>
+    </div>
+  </div>
+
+  <div *ngIf="showCompleted && completedTasks.length > 0">
+    <h2 class="section-title">Concluídas ({{ completedTasks.length }})</h2>
+
+    <div class="task-group">
+      <app-task-card
+        *ngFor="let t of completedTasks"
+        [task]="t"
+        (toggleComplete)="toggleComplete(t)"
+        (delete)="deleteTask(t.id)"
+      ></app-task-card>
+    </div>
+  </div>
+
+   <app-feedback-dialog
+    [(open)]="openFeedbackDialog"
+    [type]="typeDialog"
+    [description]="descriptionkDialog"
+  ></app-feedback-dialog>
+
+</div>

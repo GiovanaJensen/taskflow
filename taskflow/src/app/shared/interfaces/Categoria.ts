@@ -1,6 +1,7 @@
 export interface Categoria {
-  id: string;
+  id: number;
   name: string;
-  color: string;
-  icon: string;
+  description?: string | null;
+  icon?: string | null;
+  color?: string | null;
 }

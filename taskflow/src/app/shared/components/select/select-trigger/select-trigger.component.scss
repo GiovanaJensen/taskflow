@@ -1,0 +1,22 @@
+.trigger {
+  height: 40px;
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 0 12px;
+  font-size: 14px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  &:hover {
+    border-color: #bbb;
+  }
+
+  .arrow {
+    opacity: 0.5;
+  }
+}

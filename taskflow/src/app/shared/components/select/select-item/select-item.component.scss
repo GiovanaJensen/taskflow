@@ -1,0 +1,18 @@
+.item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background: #f0f0f0;
+  }
+
+  .check {
+    width: 20px;
+    text-align: center;
+  }
+}

@@ -1,9 +1,10 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { CheckboxComponent } from "../checkbox/checkbox.component";
 import { ButtonComponent } from "../button/button.component";
 import { BadgeComponent } from "../badge/badget.component";
 import { Categoria } from "../../interfaces/Categoria";
+import { CategoryService } from "../../services/category.service";
 
 @Component({
   selector: 'app-filtro-categoria',
@@ -17,47 +18,66 @@ import { Categoria } from "../../interfaces/Categoria";
   templateUrl: './filtro-categoria.component.html',
   styleUrls: ['./filtro-categoria.component.scss']
 })
-export class FiltroCategoriaComponent implements OnInit {
+export class FiltroCategoriaComponent implements OnInit, OnChanges {
 
-  @Input() selectedCategory: string | null = null;
+  @Input() selectedCategory: number | null = null;
   @Input() showCompleted = false;
+  @Input() categoryCreated = 0;
 
-  @Output() selectedCategoryChange = new EventEmitter<string | null>();
+  @Output() selectedCategoryChange = new EventEmitter<number | null>();
   @Output() showCompletedChange = new EventEmitter<boolean>();
 
   categories: Categoria[] = [];
-  taskCounts: Record<string, number> = {};
+
+  constructor(private categoryService: CategoryService) {}
 
   ngOnInit() {
-    this.loadMockCategories();
-    this.loadMockTaskCounts();
+    this.loadCategories();
   }
 
-  loadMockCategories() {
-    this.categories = [
-      { id: '1', name: 'Trabalho', color: '#3b82f6', icon: '💼' },
-      { id: '2', name: 'Pessoal',  color: '#ef4444', icon: '🏠' },
-      { id: '3', name: 'Estudos',  color: '#22c55e', icon: '📚' }
-    ];
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['categoryCreated'] && !changes['categoryCreated'].firstChange) {
+      this.loadCategories();
+    }
   }
 
-  loadMockTaskCounts() {
-    this.taskCounts = {
-      '1': 3,
-      '2': 5,
-      '3': 2
+  loadCategories() {
+    this.categoryService.getAll().subscribe({
+      next: (data) => {
+        this.categories = data.map(category => ({
+          ...category,
+          icon: this.getIcon(category.name),
+          color: this.getColor(category.name)
+        }))
+      }
+    })
+  }
+
+  getIcon(name: string): string {
+    const icons: Record<string, string> = {
+      pessoal: '🏠',
+      trabalho: '💼',
+      estudos: '📚'
+    }
+
+    return icons[name.toLowerCase()] ?? '📁'
+  }
+
+  getColor(name: string): string {
+    const colors: Record<string, string> = {
+      pessoal: '#ef4444',
+      trabalho: '#3b82f6',
+      estudos: '#22c55e'
     };
-  }
-
-  totalCount() {
-    return Object.values(this.taskCounts).reduce((a, b) => a + b, 0);
+  
+    return colors[name.toLowerCase()] ?? '#64748b';
   }
 
   toggleCompleted(value: boolean) {
     this.showCompletedChange.emit(value);
   }
 
-  selectCategory(id: string | null) {
+  selectCategory(id: number | null) {
     this.selectedCategoryChange.emit(id);
   }
 }

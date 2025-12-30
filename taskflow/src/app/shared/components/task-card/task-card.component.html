@@ -1,0 +1,59 @@
+<app-card class="task-card" [class.task-completed]="task.completed">
+  <app-card-content class="task-content">
+    <div class="task-wrapper">
+
+      <app-checkbox
+        class="task-checkbox"
+        [checked]="task.completed"
+        (checkedChange)="onToggle()"
+      ></app-checkbox>
+
+      <div class="task-main">
+        <div class="task-header">
+
+          <div class="task-texts">
+            <h3 class="task-title" [class.completed]="task.completed">
+              {{ task.title }}
+            </h3>
+
+            <p *ngIf="task.description" class="task-description">
+              {{ task.description }}
+            </p>
+            <div class="task-badges">
+              <app-badge *ngIf="task.categories" variant="outline" class="badge-category">
+                <span>{{ task.categories.icon }}</span>
+                <span>{{ task.categories.name }}</span>
+              </app-badge>
+
+              <app-badge
+                variant="secondary"
+                class="badge-priority"
+                [ngClass]="task.priority"
+              >
+                {{ priorityLabels[task.priority] }}
+              </app-badge>
+
+              <app-badge *ngIf="task.due_date" variant="outline" class="badge-date">
+                <span>📅</span>
+                <span>{{ formatDate(task.due_date) }}</span>
+              </app-badge>
+
+            </div>
+          </div>
+
+          <app-dropdown>
+            <app-dropdown-trigger>
+              <app-button variant="ghost" size="icon" class="task-menu-btn">⋮</app-button>
+            </app-dropdown-trigger>
+
+            <app-dropdown-content align="end">
+              <app-dropdown-item class="delete-item" (select)="onDelete()">
+                🗑️ Excluir
+              </app-dropdown-item>
+            </app-dropdown-content>
+          </app-dropdown>
+        </div>
+      </div>
+    </div>
+  </app-card-content>
+</app-card>

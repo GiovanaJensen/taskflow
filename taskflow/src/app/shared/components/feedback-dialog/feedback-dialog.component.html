@@ -1,0 +1,9 @@
+<app-dialog [(open)]="open" (openChange)="openChange.emit($event)">
+
+  <div class="grid">
+    <img [src]="img" alt="Imagem do modal">
+    <h1>{{title}}</h1>
+    <h2>{{description}}</h2>
+  </div>
+
+</app-dialog>

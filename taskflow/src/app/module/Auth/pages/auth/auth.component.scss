@@ -35,7 +35,6 @@
 
 .subtitle {
   font-size: 1.25rem;
-  color: var(--muted-foreground);
 }
 
 .features {
@@ -54,4 +53,14 @@ form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.error {
+  font-size: 0.8rem;
+  color: var(--destructive);
+}
+
+.success {
+  font-size: 0.8rem;
+  color: var(--success);
 }

@@ -1,0 +1,49 @@
+<app-dialog [(open)]="open" (openChange)="openChange.emit($event)">
+
+  <app-dialog-title>
+    Nova categoria
+  </app-dialog-title>
+
+  <form class="form" (ngSubmit)="submit()">
+
+    <div class="field">
+      <label>Nome *</label>
+      <app-input
+        [(ngModel)]="name"
+        name="title"
+        placeholder="Ex: Finalizar relatório"
+        required
+      />
+    </div>
+
+    <div class="field">
+      <label>Descrição</label>
+      <app-input
+        [(ngModel)]="description"
+        name="description"
+        placeholder="Adicione detalhes sobre a tarefa..."
+      />
+    </div>
+
+    <app-dialog-footer>
+      <div class="actions">
+        <app-button
+          variant="outline"
+          type="button"
+          (click)="close()"
+        >
+          Cancelar
+        </app-button>
+
+        <app-button
+          type="submit"
+          [disabled]="isSubmitting"
+        >
+          {{ isSubmitting ? 'Criando...' : 'Criar tarefa' }}
+        </app-button>
+      </div>
+    </app-dialog-footer>
+
+  </form>
+
+</app-dialog>
