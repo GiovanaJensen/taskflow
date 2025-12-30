@@ -15,7 +15,7 @@ describe('TaskCardComponent (comportamento)', () => {
       priority: 'medium',
       categories: { name: 'Casa', icon: '🏠', color: 'red' },
       due_date: '2024-01-10',
-      category_id: '',
+      category_id: 1,
       created_at: '2025-12-10'
   };
 
@@ -34,7 +34,7 @@ describe('TaskCardComponent (comportamento)', () => {
     const emitSpy = jest.spyOn(component.toggleComplete, 'emit');
 
     const checkbox = fixture.debugElement.query(By.css('app-checkbox'));
-    checkbox.triggerEventHandler('changed', null);
+    checkbox.triggerEventHandler('checkedChange', null);
 
     expect(emitSpy).toHaveBeenCalled();
   });
