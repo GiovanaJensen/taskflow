@@ -1,21 +1,45 @@
 <app-navbar></app-navbar>
 
-<div class="home-container">
+<div class="home-root">
+  <main class="home-container">
 
-  <app-filtro-categoria
-    [selectedCategory]="selectedCategory"
-    [showCompleted]="showCompleted"
-    [categoryCreated]="categoryCreatedVersion"
-    (selectedCategoryChange)="onCategoryChange($event)"
-    (showCompletedChange)="onShowCompletedChange($event)"
-    ></app-filtro-categoria>
+    <div class="home-header">
+      <div class="home-title">
+        <h1>Minhas Tarefas</h1>
+        <p>Gerencie suas tarefas e projetos</p>
+      </div>
 
-  <app-button (click)="openNewTask = true">
-    + Nova tarefa
-  </app-button>
-  <app-button (click)="openNewCategory = true">
-    + Nova category
-  </app-button>
+      <div class="home-actions">
+        <app-button (click)="openNewTask = true">
+          + Nova tarefa
+        </app-button>
+
+        <app-button (click)="openNewCategory = true" variant="outline">
+          + Nova categoria
+        </app-button>
+      </div>
+    </div>
+
+    <div class="home-grid">
+      <aside class="home-sidebar">
+        <app-filtro-categoria
+          [selectedCategory]="selectedCategory"
+          [showCompleted]="showCompleted"
+          [categoryCreated]="categoryCreatedVersion"
+          (selectedCategoryChange)="onCategoryChange($event)"
+          (showCompletedChange)="onShowCompletedChange($event)"
+        ></app-filtro-categoria>
+      </aside>
+
+      <section class="home-content">
+        <app-task-list
+          [selectedCategory]="selectedCategory"
+          [showCompleted]="showCompleted"
+          [taskCreated]="taskCreatedVersion"
+        ></app-task-list>
+      </section>
+    </div>
+  </main>
 
   <app-new-task-dialog
     [(open)]="openNewTask"
@@ -27,10 +51,10 @@
     (submitCategory)="createCategory($event)"
   ></app-new-category-dialog>
 
-  <app-task-list
-    [selectedCategory]="selectedCategory"
-    [showCompleted]="showCompleted"
-    [taskCreated]="taskCreatedVersion"
-  ></app-task-list>
+  <app-feedback-dialog
+    [(open)]="openFeedbackDialog"
+    [type]="typeDialog"
+    [description]="descriptionkDialog"
+  ></app-feedback-dialog>
 
 </div>

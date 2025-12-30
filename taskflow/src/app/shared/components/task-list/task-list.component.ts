@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { TaskCardComponent } from '../task-card/task-card.component';
 import { Tarefa } from '../../interfaces/Tarefa';
 import { TaskService } from '../../services/task.service';
+import { FeedbackDialogComponent } from "../feedback-dialog/feedback-dialog.component";
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.scss'],
-  imports: [CommonModule, TaskCardComponent]
+  imports: [CommonModule, TaskCardComponent, FeedbackDialogComponent]
 })
 export class TaskListComponent implements OnInit, OnChanges {
 
@@ -19,6 +20,10 @@ export class TaskListComponent implements OnInit, OnChanges {
 
   tasks: Tarefa[] = [];
   isLoading = true;
+
+  openFeedbackDialog = false;
+  descriptionkDialog = '';
+  typeDialog: "error" | "warning" | "success" = "success";
 
   constructor(private taskService: TaskService) {}
 
@@ -68,7 +73,9 @@ export class TaskListComponent implements OnInit, OnChanges {
         task.completed = !task.completed;
       },
       error: () => {
-        alert('Erro ao concluir tarefa');
+        this.openFeedbackDialog = true;
+        this.descriptionkDialog = "Erro ao concluir a tarefa!";
+        this.typeDialog = 'error';
       }
     })
   }
@@ -79,7 +86,9 @@ export class TaskListComponent implements OnInit, OnChanges {
         this.tasks = this.tasks.filter(t => t.id !== id);
       },
       error: (error) => {
-        alert('Erro ao deletar tarefa');
+        this.openFeedbackDialog = true;
+        this.descriptionkDialog = `Erro ao deletar a tarefa! ${error}`;
+        this.typeDialog = 'error';
       }
     });
   }

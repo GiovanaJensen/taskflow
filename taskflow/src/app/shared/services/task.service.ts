@@ -53,7 +53,7 @@ export class TaskService {
           id: String(task.id),
           title: task.title,
           description: task.description,
-          completed: false,
+          completed: task.isCompleted,
           priority: this.mapPriority(task.priority),
           due_date: task.dueDate,
           category_id: task.categoryId,

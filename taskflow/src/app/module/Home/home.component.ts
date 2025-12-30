@@ -16,6 +16,7 @@ import { NewTaskDialogComponent } from "../../shared/components/new-task-dialog/
 import { TaskService } from "../../shared/services/task.service";
 import { NewCategoryDialogComponent } from "../../shared/components/new-category-dialog/new-category-dialog.component";
 import { CategoryService } from "../../shared/services/category.service";
+import { FeedbackDialogComponent } from "../../shared/components/feedback-dialog/feedback-dialog.component";
 
 @Component({
   selector: 'app-home',
@@ -37,7 +38,8 @@ import { CategoryService } from "../../shared/services/category.service";
     SelectItemComponent,
     ButtonComponent,
     NewTaskDialogComponent,
-    NewCategoryDialogComponent
+    NewCategoryDialogComponent,
+    FeedbackDialogComponent
 ]
 })
 export class HomeComponent {
@@ -50,6 +52,10 @@ export class HomeComponent {
 
   selectedCategory: number | null = null;
   showCompleted = false;
+
+  openFeedbackDialog = false;
+  descriptionkDialog = '';
+  typeDialog: "error" | "warning" | "success" = "success";
 
   constructor(
     private taskService: TaskService,
@@ -69,11 +75,15 @@ export class HomeComponent {
   createTask(task: any) {
     this.taskService.createTask(task).subscribe({
       next: (data) => {
-        alert('Tarefa criada com sucesso');
+        this.openFeedbackDialog = true;
+        this.descriptionkDialog = `Sucesso ao criar a tarefa!`;
+        this.typeDialog = 'success';
         this.taskCreatedVersion++;
       },
       error: (error) => {
-        alert('Erro ao criar tarefa');
+        this.openFeedbackDialog = true;
+        this.descriptionkDialog = `Erro ao criar a tarefa! ${error}`;
+        this.typeDialog = 'error';
       }
     })
   }
@@ -81,11 +91,15 @@ export class HomeComponent {
   createCategory(task: any) {
     this.categoryService.createCategory(task).subscribe({
       next: (data) => {
-        alert('Categoria criada com sucesso');
+        this.openFeedbackDialog = true;
+        this.descriptionkDialog = `Sucesso ao criar a categoria!`;
+        this.typeDialog = 'success';
         this.categoryCreatedVersion++;
       },
       error: (error) => {
-        alert('Erro ao criar categoria');
+        this.openFeedbackDialog = true;
+        this.descriptionkDialog = `Erro ao criar a categoria! ${error}`;
+        this.typeDialog = 'error';
       }
     })
   }

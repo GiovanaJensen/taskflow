@@ -45,7 +45,7 @@ export class NewTaskDialogComponent implements OnChanges {
   title = '';
   description = '';
   categoryId: string | null = null;
-  priority: 'low' | 'medium' | 'high' = 'medium';
+  priority: 'baixa' | 'média' | 'alta' = 'média';
   dueDate: string | null = null;
 
   isSubmitting = false;
@@ -139,7 +139,7 @@ export class NewTaskDialogComponent implements OnChanges {
     this.title = '';
     this.description = '';
     this.categoryId = null;
-    this.priority = 'medium';
+    this.priority = 'média';
     this.dueDate = null;
   }
 }

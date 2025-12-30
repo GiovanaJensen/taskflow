@@ -36,12 +36,6 @@ export class TaskCardComponent {
   @Output() toggleComplete = new EventEmitter<{ id: string; completed: boolean }>();
   @Output() delete = new EventEmitter<string>();
 
-  priorityColors: Record<Tarefa['priority'], string> = {
-    low: 'bg-blue-500/10 text-blue-700 dark:text-blue-400',
-    medium: 'bg-warning/10 text-warning-foreground',
-    high: 'bg-destructive/10 text-destructive',
-  };
-
   priorityLabels: Record<Tarefa['priority'], string> = {
     low: 'Baixa',
     medium: 'Média',

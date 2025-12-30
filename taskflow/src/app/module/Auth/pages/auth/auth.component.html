@@ -26,6 +26,7 @@
           </app-tabs-list>
 
           <app-tabs-content value="login">
+            <p *ngIf="invalidCredentials" class="error">Credenciais inválidas</p>
             <form [formGroup]="loginForm" (ngSubmit)="login()">
               <div class="form-field">
                   <app-label for="email">E-mail</app-label>
@@ -48,6 +49,8 @@
           </app-tabs-content>
 
           <app-tabs-content value="signup">
+            <p *ngIf="invalidSignup" class="error">Erro ao fazer cadastro</p>
+            <p *ngIf="successfullSignup" class="success">Cadastro realizado com sucesso! Faça login para acessar o Taskflow</p>
             <form [formGroup]="signupForm" (ngSubmit)="signup()">
               <div class="form-field">
                   <app-label for="name">Nome completo</app-label>

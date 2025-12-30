@@ -44,6 +44,9 @@ import { HttpClientModule } from "@angular/common/http";
 
 export class AuthComponent implements OnInit {
     isLoading = false;
+    invalidCredentials = false;
+    invalidSignup = false;
+    successfullSignup = false;
 
     loginForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
@@ -82,13 +85,13 @@ export class AuthComponent implements OnInit {
               if (response.token) {
                 localStorage.setItem('token', response.token);
               }
+              this.invalidCredentials = false;
         
-              alert('Login realizado com sucesso!');
               this.router.navigate(['']);
             },
             error: (error) => {
               this.isLoading = false;
-              alert(error.error?.message || 'Credenciais inválidas');
+              this.invalidCredentials = true;
             }
           });
     }
@@ -107,12 +110,14 @@ export class AuthComponent implements OnInit {
         }).subscribe({
             next: () => {
                 this.isLoading = false;
-                alert('Cadastro realizado com sucesso! Você já pode fazer login!');
+                 this.invalidSignup = false;
+                 this.successfullSignup = true;
+
                 this.signupForm.reset();
             },
             error: (err) => {
                 this.isLoading = false;
-                alert('Erro ao criar usuário: ' + (err.error?.message || 'Erro desconhecido'));
+                 this.invalidSignup = true;
             }
         })
     }
